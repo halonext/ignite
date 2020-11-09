@@ -513,7 +513,8 @@ class BinaryObjectField {
             if (this._value === undefined) {
                 await this.getValue();
             }
-            BinaryUtils.checkCompatibility(this._value, expectedTypeCode);
+            const objectType = BinaryUtils.calcObjectType(this._value);
+            BinaryUtils.checkCompatibility(this._value, objectType);
             await communicator.writeObject(buffer, this._value, this._type);
         }
         this._communicator = communicator;
